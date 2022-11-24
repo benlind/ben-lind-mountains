@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+And+White+Picture&family=Bungee+Outline&family=Grenze+Gotisch&family=Rubik+Puddles&family=Stick&display=swap');
+
+:root {
+  --hue: 263;
+  --middleground: hsl(var(--hue), 14%, 25%);
+  --foreground-light: hsl(var(--hue), 16%, 19%);
+  --foreground-dark: hsl(var(--hue), 20%, 7%);
+  --sky-gradient-light: hsl(var(--hue), 16%, 45%);
+  --mountain-shadow: hsl(var(--hue), 11%, 21%);
+  --snow-dark: hsl(var(--hue), 16%, 56%);
+  --snow-light: hsl(var(--hue), 22%, 70%);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* background: var(--middleground); */
+  background: var(--foreground-dark);
+  color: white;
+  font: 16px 'Silkscreen', cursive;
+  /* font-family: 'Nabla', cursive; */
+  /* font-family: 'Comfortaa', cursive; */
+  /* font-family: 'Black And White Picture', sans-serif; */
+  /* font-family: 'Bungee Outline', cursive; */
+  /* font-family: 'Grenze Gotisch', cursive; */
+  /* font-family: 'Rubik Puddles', cursive; */
+  /* font-family: 'Stick', sans-serif; */
+}
+
+main {
+  /* border: 10px solid white;
+  border-radius: 20px;
+  position: absolute;
+  height: 350px;
+  width: 500px;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+}
+
+/* TODO Have name animate up from behind mountains */
+/* TODO Have name slowly grow and shrink */
+.name {
+  text-align: center;
+  text-shadow: 7px 7px 0 var(--mountain-shadow);
+  font-size: 72px;
+  position: absolute;
+  /* padding-top: 12vh; */
+  width: 100%;
+  top: 15%;
+  z-index: 1;
+}
+
+.foreground-1 {
+  background: var(--middleground);
+  position: absolute;
+  top: 50%;
+  height: 50vh;
+  width: 100%;
+  z-index: 100;
+}
+
+.foreground-2 {
+  background: radial-gradient(ellipse at top, var(--foreground-light) 0, var(--foreground-dark) 100%);
+  position: absolute;
+  bottom: 0;
+  height: 45vh;
+  width: 100%;
+  z-index: 101;
+}
+
+.mountain {
+  background: var(--middleground);
+  box-shadow: 10px -10px 0 var(--mountain-shadow);
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+}
+
+.mountain-center {
+  height: 200px;
+  width: 200px;
+  transform: translate(-50%, -50%) rotate(45deg) skew(10deg, 10deg);
+}
+
+.mountain-center div {
+  background: var(--snow-dark);
+  box-shadow: 0 10px 0 var(--snow-light);
+  height: 50px;
+  width: 50px;
+  transform: translate(-50%, -50%) rotate(20deg);
+}
+
+.mountain-left-1 {
+  height: 125px;
+  width: 125px;
+  transform: translate(calc(-50% - 150px), -50%) rotate(45deg) skew(2deg, 2deg);
+}
+
+.mountain-right-1 {
+  height: 100px;
+  width: 100px;
+  transform: translate(calc(-50% + 110px), -50%) rotate(45deg) skew(5deg, 5deg);
+}
+
+.mountain-right-2 {
+  height: 40px;
+  width: 40px;
+  transform: translate(calc(-50% + 175px), -50%) rotate(45deg) skew(5deg, 5deg);
+  z-index: 3;
+}
+
+.background {
+  background: radial-gradient(ellipse at bottom, var(--sky-gradient-light) 0, var(--middleground) 100%);
+  height: 50vh;
+  width: 100%;
+}
