@@ -5,13 +5,27 @@
 
 :root {
   --hue: 263;
-  --middleground: hsl(var(--hue), 14%, 25%);
-  --foreground-light: hsl(var(--hue), 16%, 19%);
-  --foreground-dark: hsl(var(--hue), 20%, 7%);
-  --sky-gradient-light: hsl(var(--hue), 16%, 45%);
-  --mountain-shadow: hsl(var(--hue), 11%, 21%);
-  --snow-dark: hsl(var(--hue), 16%, 56%);
-  --snow-light: hsl(var(--hue), 22%, 70%);
+  --saturation: 18%;
+
+  --middleground: hsl(var(--hue), var(--saturation), 25%);
+  --middleground-hover: hsl(var(--hue), var(--saturation), 28%);
+  --foreground-light: hsl(var(--hue), var(--saturation), 19%);
+  --foreground-dark: hsl(var(--hue), var(--saturation), 7%);
+  --sky-gradient-light: hsl(var(--hue), var(--saturation), 45%);
+  --mountain-shadow: hsl(var(--hue), var(--saturation), 21%);
+  --snow-base: hsl(var(--hue), var(--saturation), 65%);
+  --snow-base-dim: hsl(var(--hue), var(--saturation), 55%);
+  --snow-highlight: hsl(var(--hue), var(--saturation), 85%);
+
+  --mountain-x-shift: -7%;
+
+  --secondary: rgb(160, 237, 60);
+
+  --text-animation-delay: 1000ms;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html, body {
@@ -20,10 +34,13 @@ html, body {
 }
 
 body {
-  /* background: var(--middleground); */
   background: var(--foreground-dark);
   color: white;
-  font: 16px 'Silkscreen', cursive;
+  font: 20px 'Comfortaa', sans-serif;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  line-height: 1.5;
   /* font-family: 'Nabla', cursive; */
   /* font-family: 'Comfortaa', cursive; */
   /* font-family: 'Black And White Picture', sans-serif; */
@@ -34,6 +51,13 @@ body {
 }
 
 main {
+  flex-grow: 1;
+  overflow: hidden;
+  position: relative;
+  min-height: 100%;
+  width: 100%;
+
+  /* Card: */
   /* border: 10px solid white;
   border-radius: 20px;
   position: absolute;
@@ -47,21 +71,127 @@ main {
 
 /* TODO Have name animate up from behind mountains */
 /* TODO Have name slowly grow and shrink */
-.name {
+h1 {
+  margin: 0;
   text-align: center;
-  text-shadow: 7px 7px 0 var(--mountain-shadow);
-  font-size: 72px;
+  font: 72px 'Silkscreen', sans-serif;
   position: absolute;
-  /* padding-top: 12vh; */
+  justify-content: center;
+  display: flex;
   width: 100%;
-  top: 15%;
+  top: 12%;
   z-index: 1;
+}
+
+h1 span {
+  animation: 1s cubic-bezier(0,.68,.19,1) 0s 1 slide-up-letters forwards;
+  text-shadow: 0px 0px 0 var(--mountain-shadow);
+  display: inline-block;
+  margin-top: 65vh;
+}
+
+/* h1 span:nth-child(1) {
+  animation-delay: 100ms;
+}
+h1 span:nth-child(2) {
+  animation-delay: 125ms;
+}
+h1 span:nth-child(3) {
+  animation-delay: 150ms;
+}
+h1 span:nth-child(5) {
+  animation-delay: 300ms;
+}
+h1 span:nth-child(6) {
+  animation-delay: 325ms;
+}
+h1 span:nth-child(7) {
+  animation-delay: 350ms;
+}
+h1 span:nth-child(8) {
+  animation-delay: 375ms;
+} */
+
+h1 span:nth-child(1) {
+  animation-delay: calc(var(--text-animation-delay) + 100ms);
+}
+h1 span:nth-child(2) {
+  animation-delay: calc(var(--text-animation-delay) + 150ms);
+}
+h1 span:nth-child(3) {
+  animation-delay: calc(var(--text-animation-delay) + 125ms);
+}
+h1 span:nth-child(5) {
+  animation-delay: calc(var(--text-animation-delay) + 325ms);
+}
+h1 span:nth-child(6) {
+  animation-delay: calc(var(--text-animation-delay) + 300ms);
+}
+h1 span:nth-child(7) {
+  animation-delay: calc(var(--text-animation-delay) + 400ms);
+}
+h1 span:nth-child(8) {
+  animation-delay: calc(var(--text-animation-delay) + 550ms);
+}
+
+@keyframes slide-up-letters {
+  0% {
+    margin-top: 65vh;
+    text-shadow: 0px 0px 0 var(--mountain-shadow);
+  }
+  50% {
+    text-shadow: 0px 0px 0 var(--mountain-shadow);
+  }
+  100% {
+    margin-top: 0;
+    text-shadow: 7px 7px 0 var(--mountain-shadow);
+  }
+}
+
+.spacer {
+  width: 30px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+section {
+  animation: 1s cubic-bezier(0,.68,.19,1) 2000ms 1 fade-in forwards;
+  position: absolute;
+  top: 27%;
+  text-align: center;
+  text-shadow: 2px 2px 0 var(--mountain-shadow);
+  width: 100%;
+  opacity: 0;
+  z-index: 10;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+a {
+  color: var(--secondary);
+  text-underline-offset: 3px;
 }
 
 .foreground-1 {
   background: var(--middleground);
   position: absolute;
-  top: 50%;
+  top: 65%;
   height: 50vh;
   width: 100%;
   z-index: 100;
@@ -71,56 +201,104 @@ main {
   background: radial-gradient(ellipse at top, var(--foreground-light) 0, var(--foreground-dark) 100%);
   position: absolute;
   bottom: 0;
-  height: 45vh;
+  height: 30vh;
   width: 100%;
   z-index: 101;
 }
 
-.mountain {
-  background: var(--middleground);
-  box-shadow: 10px -10px 0 var(--mountain-shadow);
-  overflow: hidden;
+.background {
+  background: radial-gradient(ellipse at bottom, var(--sky-gradient-light) 0, var(--middleground) 100%);
+  height: 65vh;
+  width: 100%;
+}
+
+.mountains {
   position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100vw;
+  max-height: 500px;
+  width: 100%;
+  max-width: 500px;
   z-index: 5;
 }
 
+.mountain {
+  animation: 1s cubic-bezier(0,.68,.19,1) 0s 1 slide-up-mountains forwards;
+  background: var(--middleground);
+  box-shadow: 0px 0px 0 var(--mountain-shadow);
+  overflow: hidden;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 5;
+  transition: background .2s;
+}
+.mountain:hover {
+  background: var(--middleground-hover);
+}
+
+@keyframes slide-up-mountains {
+  0% {
+    box-shadow: 0px 0px 0 var(--mountain-shadow);
+    top: 100%;
+  }
+  25% {
+    box-shadow: 0px 0px 0 var(--mountain-shadow);
+  }
+  100% {
+    box-shadow: 10px -10px 0 var(--mountain-shadow);
+    top: 50%;
+  }
+}
+
 .mountain-center {
-  height: 200px;
-  width: 200px;
-  transform: translate(-50%, -50%) rotate(45deg) skew(10deg, 10deg);
+  height: 45%;
+  width: 45%;
+  transform: translate(calc(-50% + var(--mountain-x-shift)), -45%) rotate(45deg) skew(10deg, 10deg);
+  animation-delay: 100ms;
 }
 
 .mountain-center div {
-  background: var(--snow-dark);
-  box-shadow: 0 10px 0 var(--snow-light);
-  height: 50px;
-  width: 50px;
+  background: var(--snow-base);
+  box-shadow: 0 10px 0 var(--snow-highlight);
+  height: 25%;
+  width: 25%;
   transform: translate(-50%, -50%) rotate(20deg);
 }
 
 .mountain-left-1 {
-  height: 125px;
-  width: 125px;
-  transform: translate(calc(-50% - 150px), -50%) rotate(45deg) skew(2deg, 2deg);
+  height: 30%;
+  width: 30%;
+  transform: translate(calc(-150% + var(--mountain-x-shift)), -37%) rotate(45deg) skew(2deg, 2deg);
+  animation-delay: 400ms;
+}
+
+.mountain-left-1 div {
+  background: var(--snow-base-dim);
+  height: 28%;
+  width: 28%;
+  transform: translate(-50%, -50%) rotate(20deg);
 }
 
 .mountain-right-1 {
-  height: 100px;
-  width: 100px;
-  transform: translate(calc(-50% + 110px), -50%) rotate(45deg) skew(5deg, 5deg);
+  height: 30%;
+  width: 30%;
+  transform: translate(calc(20% + var(--mountain-x-shift)), -45%) rotate(45deg) skew(5deg, 5deg);
+  animation-delay: 200ms;
+}
+.mountain-right-1 div {
+  background: var(--snow-base-dim);
+  height: 28%;
+  width: 28%;
+  transform: translate(-50%, -50%) rotate(-15deg);
 }
 
 .mountain-right-2 {
-  height: 40px;
-  width: 40px;
-  transform: translate(calc(-50% + 175px), -50%) rotate(45deg) skew(5deg, 5deg);
+  height: 10%;
+  width: 10%;
+  transform: translate(calc(380% + var(--mountain-x-shift)), -45%) rotate(45deg) skew(5deg, 5deg);
   z-index: 3;
-}
-
-.background {
-  background: radial-gradient(ellipse at bottom, var(--sky-gradient-light) 0, var(--middleground) 100%);
-  height: 50vh;
-  width: 100%;
+  animation-delay: 500ms;
 }
