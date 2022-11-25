@@ -8,7 +8,10 @@
   --saturation: 18%;
 
   --middleground: hsl(var(--hue), var(--saturation), 25%);
-  --middleground-hover: hsl(var(--hue), var(--saturation), 28%);
+  --mountain: hsl(var(--hue), var(--saturation), 27%);
+  --mountain-hover: hsl(var(--hue), var(--saturation), 29%);
+  --mountain-light: hsl(var(--hue), var(--saturation), 30%);
+  --mountain-light-hover: hsl(var(--hue), var(--saturation), 32%);
   --foreground-light: hsl(var(--hue), var(--saturation), 19%);
   --foreground-dark: hsl(var(--hue), var(--saturation), 7%);
   --sky-gradient-light: hsl(var(--hue), var(--saturation), 45%);
@@ -17,6 +20,10 @@
   --snow-base: hsl(var(--hue), var(--saturation), 65%);
   --snow-base-dim: hsl(var(--hue), var(--saturation), 55%);
   --snow-highlight: hsl(var(--hue), var(--saturation), 85%);
+
+  --capy-left-end: calc(53% + var(--mountain-x-shift));
+  --capy-top-start: 55%;
+  --capy-top-end: 17%;
 
   --mountain-x-shift: -7%;
 
@@ -35,7 +42,7 @@ html, body {
 }
 
 body {
-  background: var(--foreground-dark);
+  background: var(--sky-gradient-dark);
   color: white;
   font: 20px 'Comfortaa', sans-serif;
   display: flex;
@@ -180,18 +187,18 @@ section {
   margin-right: 3px;
 }
 
-a,
-a:visited {
+section a,
+section a:visited {
   color: var(--secondary);
   text-decoration: none;
   position: relative;
   display: inline-block;
-  transition: transform 0.05s;
+  transition: transform 0.1s;
 }
-a:hover {
+section a:hover {
   transform: rotate(2deg);
 }
-a::after {
+section a::after {
   background-color: var(--secondary);
   content: '';
   position: absolute;
@@ -203,7 +210,7 @@ a::after {
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }
-a:hover::after {
+section a:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
@@ -232,6 +239,68 @@ a:hover::after {
   width: 100%;
 }
 
+.capy {
+  position: absolute;
+  top: var(--capy-top-start);
+  left: var(--capy-left-end);
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  z-index: 15;
+}
+
+.capy img {
+  image-rendering: pixelated;
+  height: auto;
+  width: 32px;
+}
+
+.capy.hello {
+  animation: 2s cubic-bezier(0,.68,.19,1) 0s 1 capy-jump forwards;
+}
+
+@keyframes capy-jump {
+  0% {
+    top: var(--capy-top-start);
+    left: calc(var(--capy-left-end));
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  33% {
+    top: calc(((var(--capy-top-end) - var(--capy-top-start)) / 3) + var(--capy-top-start));
+    left: calc(var(--capy-left-end) - 4%);
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  40% {
+    top: calc(((var(--capy-top-end) - var(--capy-top-start)) / 3) + var(--capy-top-start));
+    left: calc(var(--capy-left-end) - 4%);
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  50% {
+    top: calc(((var(--capy-top-end) - var(--capy-top-start)) / 3) + var(--capy-top-start));
+    left: calc(var(--capy-left-end) - 4%);
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  66% {
+    top: calc(((var(--capy-top-end) - var(--capy-top-start)) / 3 * 2) + var(--capy-top-start));
+    left: calc(var(--capy-left-end) + 4%);
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  80% {
+    top: calc(((var(--capy-top-end) - var(--capy-top-start)) / 3 * 2) + var(--capy-top-start));
+    left: calc(var(--capy-left-end) + 4%);
+    transform: translate(-50%, -50%) scaleX(-1);
+  }
+  90% {
+    top: calc(((var(--capy-top-end) - var(--capy-top-start)) / 3 * 2) + var(--capy-top-start));
+    left: calc(var(--capy-left-end) + 4%);
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  100% {
+    top: var(--capy-top-end);
+    left: var(--capy-left-end);
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+}
+
 .mountains {
   position: absolute;
   top: 65%;
@@ -246,7 +315,7 @@ a:hover::after {
 
 .mountain {
   animation: 1s cubic-bezier(0,.68,.19,1) 0s 1 slide-up-mountains forwards;
-  background: var(--middleground);
+  background: var(--mountain);
   box-shadow: 0px 0px 0 var(--mountain-shadow);
   overflow: hidden;
   position: absolute;
@@ -256,7 +325,7 @@ a:hover::after {
   transition: background .2s;
 }
 .mountain:hover {
-  background: var(--middleground-hover);
+  background: var(--mountain-hover);
 }
 
 @keyframes slide-up-mountains {
@@ -274,10 +343,14 @@ a:hover::after {
 }
 
 .mountain-center {
+  background-color: var(--mountain-light);
   height: 45%;
   width: 45%;
   transform: translate(calc(-50% + var(--mountain-x-shift)), -45%) rotate(45deg) skew(10deg, 10deg);
   animation-delay: 100ms;
+}
+.mountain-center:hover {
+  background: var(--mountain-light-hover);
 }
 
 .mountain-center div {
